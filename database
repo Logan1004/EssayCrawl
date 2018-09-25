@@ -1,0 +1,14 @@
+create table EssayInfo
+(
+	DownloadURL varchar(400) null,
+	Title varchar(100) null,
+	SourceofArticle varchar(200) null,
+	Reference varchar(200) null,
+	Author varchar(100) null,
+	AuthorCompany varchar(200) null,
+	KeyWord varchar(200) null,
+	Abstract longtext null,
+	Documents longtext null
+)
+;
+
