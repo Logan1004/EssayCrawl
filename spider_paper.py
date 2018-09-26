@@ -9,10 +9,10 @@ import xlwt
 from configparser import ConfigParser
 import pymysql
 
-db = pymysql.connect("localhost", "root", "1234", "essaycollecting")
+db = pymysql.connect("localhost", "root", "1234", "CrawlProject")
 cursor = db.cursor()
 
-def spider_paper():
+def spider_paper(Category):
     start = time.clock()
     # f=urllib2.urlopen(url, timeout=5).read()
     # soup=BeautifulSoup(html)
@@ -146,13 +146,13 @@ def spider_paper():
         #for i in range(len(outstring)):
         #    sheet.write(lin_num, i, outstring[i])
         print(outstring[0]+" "+outstring[1]+" "+outstring[2]+" "+outstring[3]+" "+outstring[4]+" "+
-               outstring[5]+" "+outstring[6]+" "+outstring[7]+" "+outstring[8])
+               outstring[5]+" "+outstring[6]+" "+outstring[7]+" "+outstring[8]+Category[0])
         sql = "INSERT INTO EssayInfo(DownloadURL,Title," \
               "SourceofArticle,Reference,Author,AuthorCompany," \
-              "KeyWord,Abstract,Documents) " \
-              "VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')" % \
+              "KeyWord,Abstract,Documents,Category) " \
+              "VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')" % \
               (outstring[0],outstring[1],outstring[2],outstring[3],outstring[4],
-               outstring[5],outstring[6],outstring[7],outstring[8])
+               outstring[5],outstring[6],outstring[7],outstring[8],Category[0])
         try:
             # 执行sql语句
             cursor.execute(sql)

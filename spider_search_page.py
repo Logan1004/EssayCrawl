@@ -30,8 +30,14 @@ def get_paper_url(page_url):
                 reference = item# 获取被引次数
             elif '年' in item: # 获取文章出处
                 publish = item
-            #print(publish)
-            #print(reference)
+            #k=0
+            #for i in publish:
+            #    if (publish[i]>"0" and publish[i]<="9"):
+            #        for j in range(1,4):
+            #            k=k+(publish[i]-'0')**(10^(4-j))
+            #print(k)
+            #print(publish+"dnvjd")
+            #print(reference+"casnkj")
         #print(year_count)
         f.write(href + '\t' + title + '\t' + publish + '\t' + reference +'\n')
     f.close()
