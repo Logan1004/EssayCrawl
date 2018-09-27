@@ -10,6 +10,7 @@ import time
 import spider_search_page
 import spider_paper
 import pymysql
+from mailbot import *
 
 
 db = pymysql.connect("localhost", "root", "1234", "CrawlProject")
@@ -91,5 +92,9 @@ if __name__ == '__main__':
     except:
         # 发生错误时回滚
         db.rollback()
+        message = "关键词信息获取异常！出错位置：1 出错文件：spider_main.py"
+        send_mail('1585084146@qq.com', message)
+        send_mail('1264160868@qq.com', message)
+        send_mail('1228974364@qq.com', message)
         print("234567876543212345678765432")
 

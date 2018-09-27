@@ -8,7 +8,7 @@ import time
 import xlwt
 from configparser import ConfigParser
 import pymysql
-
+from mailbot import *
 db = pymysql.connect("localhost", "root", "1234", "CrawlProject")
 cursor = db.cursor()
 
@@ -161,7 +161,12 @@ def spider_paper(Category):
         except:
             # 发生错误时回滚
             db.rollback()
+            message = "论文信息插入数据库异常！出错位置：1 出错文件：spider_paper.py"
+            send_mail('1585084146@qq.com', message)
+            send_mail('1264160868@qq.com', message)
+            send_mail('1228974364@qq.com', message)
             print("234567876543212345678765432")
+
         print('写入第'+str(lin_num)+'行')
         lin_num += 1
         #wb.save('data_out_'+str(keyword)+'.xls')
