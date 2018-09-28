@@ -23,17 +23,17 @@ def spider_paper(Category):
     keyword = cf.get('base', 'keyword')# 关键词
 
 # 写入Excel
-    #wb = xlwt.Workbook("data_out.xls")
-    #sheet = wb.add_sheet("data-out")
-    #sheet.write(0, 0, '下载网址')
-    #sheet.write(0, 1, '标题')
-    #sheet.write(0, 2, '来源')
-    #sheet.write(0, 3, '引用')
-    #sheet.write(0, 4, '作者')
-    #sheet.write(0, 5, '作者单位')
-    #sheet.write(0, 6, '关键词')
-    #sheet.write(0, 7, '摘要')
-    #sheet.write(0, 8, '共引文献')
+    wb = xlwt.Workbook("data_out.xls")
+    sheet = wb.add_sheet("data-out")
+    sheet.write(0, 0, '下载网址')
+    sheet.write(0, 1, '标题')
+    sheet.write(0, 2, '来源')
+    sheet.write(0, 3, '引用')
+    sheet.write(0, 4, '作者')
+    sheet.write(0, 5, '作者单位')
+    sheet.write(0, 6, '关键词')
+    sheet.write(0, 7, '摘要')
+    sheet.write(0, 8, '共引文献')
 
     lines = file.readlines()
     txt_num = 1
@@ -143,8 +143,8 @@ def spider_paper(Category):
         line = line.strip('\n')
         line = line + '\t' + str(author) + '\t' + str(author_unit) + '\t'+ str(key_word) + '\t'+ str(tstr) + '\t' + str(ref) + '\n'
         outstring = line.split('\t')
-        #for i in range(len(outstring)):
-        #    sheet.write(lin_num, i, outstring[i])
+        for i in range(len(outstring)):
+            sheet.write(lin_num, i, outstring[i])
         print(outstring[0]+" "+outstring[1]+" "+outstring[2]+" "+outstring[3]+" "+outstring[4]+" "+
                outstring[5]+" "+outstring[6]+" "+outstring[7]+" "+outstring[8]+Category[0])
         sql = "INSERT INTO EssayInfo(DownloadURL,Title," \
@@ -163,13 +163,13 @@ def spider_paper(Category):
             db.rollback()
             message = "论文信息插入数据库异常！出错位置：1 出错文件：spider_paper.py"
             send_mail('1585084146@qq.com', message)
-            send_mail('1264160868@qq.com', message)
-            send_mail('1228974364@qq.com', message)
+            #send_mail('1264160868@qq.com', message)
+            #send_mail('1228974364@qq.com', message)
             print("234567876543212345678765432")
 
         print('写入第'+str(lin_num)+'行')
         lin_num += 1
-        #wb.save('data_out_'+str(keyword)+'.xls')
+        wb.save('data_out_'+Category[0]+'.xls')
 
     file.close()
     end = time.clock()
